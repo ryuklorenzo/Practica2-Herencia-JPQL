@@ -1,0 +1,1 @@
+rootProject.name = "Practica2-Herencia-JPQL"
