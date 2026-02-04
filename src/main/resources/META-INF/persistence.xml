@@ -6,6 +6,13 @@
 
     <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.alp.Locale</class>
+        <class>com.alp.Localidade</class>
+        <class>com.alp.Multimedia</class>
+        <class>com.alp.Propiedade</class>
+        <class>com.alp.Provincia</class>
+        <class>com.alp.Terreno</class>
+        <class>com.alp.Vivienda</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
