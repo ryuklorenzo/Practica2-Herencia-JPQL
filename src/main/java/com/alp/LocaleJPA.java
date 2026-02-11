@@ -5,12 +5,11 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
-@Table(name = "terrenos")
-public class Terreno {
+@Table(name = "locales")
+public class LocaleJPA {
     @Id
     @Column(name = "propiedad_id", nullable = false)
     private UUID id;
@@ -19,14 +18,15 @@ public class Terreno {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "propiedad_id", nullable = false)
-    private Propiedade propiedades;
-
-    @Column(name = "edificabilidad", precision = 10, scale = 2)
-    private BigDecimal edificabilidad;
+    private PropiedadeJPA propiedades;
 
     @ColumnDefault("false")
-    @Column(name = "urbanizable")
-    private Boolean urbanizable;
+    @Column(name = "escaparate")
+    private Boolean escaparate;
+
+    @ColumnDefault("false")
+    @Column(name = "salida_humos")
+    private Boolean salidaHumos;
 
     public UUID getId() {
         return id;
@@ -36,28 +36,28 @@ public class Terreno {
         this.id = id;
     }
 
-    public Propiedade getPropiedades() {
+    public PropiedadeJPA getPropiedades() {
         return propiedades;
     }
 
-    public void setPropiedades(Propiedade propiedades) {
+    public void setPropiedades(PropiedadeJPA propiedades) {
         this.propiedades = propiedades;
     }
 
-    public BigDecimal getEdificabilidad() {
-        return edificabilidad;
+    public Boolean getEscaparate() {
+        return escaparate;
     }
 
-    public void setEdificabilidad(BigDecimal edificabilidad) {
-        this.edificabilidad = edificabilidad;
+    public void setEscaparate(Boolean escaparate) {
+        this.escaparate = escaparate;
     }
 
-    public Boolean getUrbanizable() {
-        return urbanizable;
+    public Boolean getSalidaHumos() {
+        return salidaHumos;
     }
 
-    public void setUrbanizable(Boolean urbanizable) {
-        this.urbanizable = urbanizable;
+    public void setSalidaHumos(Boolean salidaHumos) {
+        this.salidaHumos = salidaHumos;
     }
 
 }

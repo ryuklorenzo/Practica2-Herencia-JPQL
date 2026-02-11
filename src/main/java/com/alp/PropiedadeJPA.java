@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "propiedades")
-public class Propiedade {
+public class PropiedadeJPA {
     @Id
     @Column(name = "id", nullable = false)
     private UUID id;
@@ -22,7 +22,7 @@ public class Propiedade {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "localidad_id")
-    private Localidade localidad;
+    private LocalidadeJPA localidad;
 
     @Column(name = "metros_cuadrados", nullable = false, precision = 10, scale = 2)
     private BigDecimal metrosCuadrados;
@@ -71,11 +71,11 @@ public class Propiedade {
         this.direccion = direccion;
     }
 
-    public Localidade getLocalidad() {
+    public LocalidadeJPA getLocalidad() {
         return localidad;
     }
 
-    public void setLocalidad(Localidade localidad) {
+    public void setLocalidad(LocalidadeJPA localidad) {
         this.localidad = localidad;
     }
 

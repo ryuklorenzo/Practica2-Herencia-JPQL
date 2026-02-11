@@ -1,0 +1,6 @@
+EJ1:
+Indicar cómo ha resuelto las relaciones entre las tablas la herramienta de IntelliJ, y si lo ha resuelto bien. Por ejemplo, la relación entre provincias y localidades:
+    - Ha resuelto bien las relaciones excepto en provincia que le falta el @onetomany y el private set localidadeJPA
+
+La carga es “LAZY” o “EARLY”. ¿Cuál piensas que es la razón para que por defecto seleccione una de ellas?
+    - Es lazy por defecto, para evitar el problema de n+1 consultas

@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "localidades")
-public class Localidade {
+public class LocalidadeJPA {
     @Id
     @Column(name = "id", nullable = false)
     private UUID id;
@@ -19,7 +19,7 @@ public class Localidade {
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "provincia_id")
-    private Provincia provincia;
+    private ProvinciaJPA provincia;
 
     public UUID getId() {
         return id;
@@ -37,12 +37,12 @@ public class Localidade {
         this.nombre = nombre;
     }
 
-    public Provincia getProvincia() {
+    public ProvinciaJPA getProvincia() {
         return provincia;
     }
 
-    public void setProvincia(Provincia provincia) {
-        this.provincia = provincia;
+    public void setProvincia(ProvinciaJPA provinciaJPA) {
+        this.provincia = provinciaJPA;
     }
 
 }

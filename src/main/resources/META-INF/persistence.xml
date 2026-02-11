@@ -4,15 +4,15 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
 
-    <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="UnidadPersistencia" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.alp.Locale</class>
-        <class>com.alp.Localidade</class>
-        <class>com.alp.Multimedia</class>
-        <class>com.alp.Propiedade</class>
-        <class>com.alp.Provincia</class>
-        <class>com.alp.Terreno</class>
-        <class>com.alp.Vivienda</class>
+        <class>com.alp.LocaleJPA</class>
+        <class>com.alp.LocalidadeJPA</class>
+        <class>com.alp.MultimediaJPA</class>
+        <class>com.alp.PropiedadeJPA</class>
+        <class>com.alp.ProvinciaJPA</class>
+        <class>com.alp.TerrenoJPA</class>
+        <class>com.alp.ViviendaJPA</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
