@@ -1,4 +1,4 @@
-package com.alp;
+package com.alp.entities;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -17,7 +17,7 @@ public class MultimediaJPA {
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "propiedad_id")
-    private PropiedadeJPA propiedad;
+    private PropiedadesJPA propiedad;
 
     @Column(name = "fichero", nullable = false)
     private String fichero;
@@ -38,11 +38,11 @@ public class MultimediaJPA {
         this.id = id;
     }
 
-    public PropiedadeJPA getPropiedad() {
+    public PropiedadesJPA getPropiedad() {
         return propiedad;
     }
 
-    public void setPropiedad(PropiedadeJPA propiedad) {
+    public void setPropiedad(PropiedadesJPA propiedad) {
         this.propiedad = propiedad;
     }
 

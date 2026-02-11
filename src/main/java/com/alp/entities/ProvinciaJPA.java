@@ -1,6 +1,10 @@
-package com.alp;
+package com.alp.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -17,7 +21,7 @@ public class ProvinciaJPA {
     private String nombre;
 
     @OneToMany(mappedBy = "provincia")
-    private Set<LocalidadeJPA> localidades = new LinkedHashSet<>();
+    private Set<LocalidadesJPA> localidades = new LinkedHashSet<>();
 
     public UUID getId() {
         return id;
@@ -35,4 +39,11 @@ public class ProvinciaJPA {
         this.nombre = nombre;
     }
 
+    public Set<LocalidadesJPA> getLocalidades() {
+        return localidades;
+    }
+
+    public void setLocalidades(Set<LocalidadesJPA> localidades) {
+        this.localidades = localidades;
+    }
 }

@@ -1,4 +1,4 @@
-package com.alp;
+package com.alp.entities;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "propiedades")
-public class PropiedadeJPA {
+public class PropiedadesJPA {
     @Id
     @Column(name = "id", nullable = false)
     private UUID id;
@@ -22,7 +22,7 @@ public class PropiedadeJPA {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "localidad_id")
-    private LocalidadeJPA localidad;
+    private LocalidadesJPA localidad;
 
     @Column(name = "metros_cuadrados", nullable = false, precision = 10, scale = 2)
     private BigDecimal metrosCuadrados;
@@ -71,11 +71,11 @@ public class PropiedadeJPA {
         this.direccion = direccion;
     }
 
-    public LocalidadeJPA getLocalidad() {
+    public LocalidadesJPA getLocalidad() {
         return localidad;
     }
 
-    public void setLocalidad(LocalidadeJPA localidad) {
+    public void setLocalidad(LocalidadesJPA localidad) {
         this.localidad = localidad;
     }
 

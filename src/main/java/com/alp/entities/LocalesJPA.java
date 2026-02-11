@@ -1,4 +1,4 @@
-package com.alp;
+package com.alp.entities;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "locales")
-public class LocaleJPA {
+public class LocalesJPA {
     @Id
     @Column(name = "propiedad_id", nullable = false)
     private UUID id;
@@ -18,7 +18,7 @@ public class LocaleJPA {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "propiedad_id", nullable = false)
-    private PropiedadeJPA propiedades;
+    private PropiedadesJPA propiedades;
 
     @ColumnDefault("false")
     @Column(name = "escaparate")
@@ -36,11 +36,11 @@ public class LocaleJPA {
         this.id = id;
     }
 
-    public PropiedadeJPA getPropiedades() {
+    public PropiedadesJPA getPropiedades() {
         return propiedades;
     }
 
-    public void setPropiedades(PropiedadeJPA propiedades) {
+    public void setPropiedades(PropiedadesJPA propiedades) {
         this.propiedades = propiedades;
     }
 

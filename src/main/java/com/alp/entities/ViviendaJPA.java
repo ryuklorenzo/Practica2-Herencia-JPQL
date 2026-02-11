@@ -1,4 +1,4 @@
-package com.alp;
+package com.alp.entities;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -19,7 +19,7 @@ public class ViviendaJPA {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "propiedad_id", nullable = false)
-    private PropiedadeJPA propiedades;
+    private PropiedadesJPA propiedades;
 
     @Column(name = "metros_habitables", precision = 10, scale = 2)
     private BigDecimal metrosHabitables;
@@ -59,11 +59,11 @@ public class ViviendaJPA {
         this.id = id;
     }
 
-    public PropiedadeJPA getPropiedades() {
+    public PropiedadesJPA getPropiedades() {
         return propiedades;
     }
 
-    public void setPropiedades(PropiedadeJPA propiedades) {
+    public void setPropiedades(PropiedadesJPA propiedades) {
         this.propiedades = propiedades;
     }
 

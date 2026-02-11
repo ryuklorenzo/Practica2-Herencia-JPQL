@@ -6,17 +6,17 @@
 
     <persistence-unit name="UnidadPersistencia" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.alp.LocaleJPA</class>
-        <class>com.alp.LocalidadeJPA</class>
-        <class>com.alp.MultimediaJPA</class>
-        <class>com.alp.PropiedadeJPA</class>
-        <class>com.alp.ProvinciaJPA</class>
-        <class>com.alp.TerrenoJPA</class>
-        <class>com.alp.ViviendaJPA</class>
+        <class>com.alp.entities.LocalesJPA</class>
+        <class>com.alp.entities.LocalidadesJPA</class>
+        <class>com.alp.entities.MultimediaJPA</class>
+        <class>com.alp.entities.PropiedadesJPA</class>
+        <class>com.alp.entities.ProvinciaJPA</class>
+        <class>com.alp.entities.TerrenoJPA</class>
+        <class>com.alp.entities.ViviendaJPA</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/inmo"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
             <property name="jakarta.persistence.jdbc.user" value="administrador"/>
             <property name="jakarta.persistence.jdbc.password" value="administrador"/>
 
