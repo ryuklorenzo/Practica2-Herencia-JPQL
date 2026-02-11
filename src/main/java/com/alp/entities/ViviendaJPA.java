@@ -49,7 +49,7 @@ public class ViviendaJPA {
     private Boolean garaje;
 
     @Column(name = "tipo_vivienda", columnDefinition = "tipo_vivienda_enum not null")
-    private Object tipoVivienda;
+    private String tipoVivienda;
 
     public UUID getId() {
         return id;
@@ -127,7 +127,7 @@ public class ViviendaJPA {
         return tipoVivienda;
     }
 
-    public void setTipoVivienda(Object tipoVivienda) {
+    public void setTipoVivienda(String tipoVivienda) {
         this.tipoVivienda = tipoVivienda;
     }
 

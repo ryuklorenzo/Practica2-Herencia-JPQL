@@ -38,10 +38,10 @@ public class PropiedadesJPA {
 
     @ColumnDefault("'en venta'")
     @Column(name = "estado", columnDefinition = "estado_propiedad")
-    private Object estado;
+    private String estado;
 
     @Column(name = "opcion", columnDefinition = "opcion_propiedad not null")
-    private Object opcion;
+    private String opcion;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "fecha_creacion")
@@ -115,7 +115,7 @@ public class PropiedadesJPA {
         return estado;
     }
 
-    public void setEstado(Object estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -123,7 +123,7 @@ public class PropiedadesJPA {
         return opcion;
     }
 
-    public void setOpcion(Object opcion) {
+    public void setOpcion(String opcion) {
         this.opcion = opcion;
     }
 
