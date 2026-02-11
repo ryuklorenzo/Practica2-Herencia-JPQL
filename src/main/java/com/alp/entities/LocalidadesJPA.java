@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -20,6 +22,9 @@ public class LocalidadesJPA {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "provincia_id")
     private ProvinciaJPA provincia;
+
+    @OneToMany(mappedBy = "localidad")
+    private Set<PropiedadesJPA> propiedades = new LinkedHashSet<>();
 
     public UUID getId() {
         return id;
@@ -41,8 +46,16 @@ public class LocalidadesJPA {
         return provincia;
     }
 
-    public void setProvincia(ProvinciaJPA provinciaJPA) {
-        this.provincia = provinciaJPA;
+    public void setProvincia(ProvinciaJPA provincia) {
+        this.provincia = provincia;
+    }
+
+    public Set<PropiedadesJPA> getPropiedades() {
+        return propiedades;
+    }
+
+    public void setPropiedades(Set<PropiedadesJPA> propiedades) {
+        this.propiedades = propiedades;
     }
 
 }

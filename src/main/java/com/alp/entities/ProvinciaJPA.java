@@ -1,10 +1,6 @@
 package com.alp.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -46,4 +42,5 @@ public class ProvinciaJPA {
     public void setLocalidades(Set<LocalidadesJPA> localidades) {
         this.localidades = localidades;
     }
+
 }

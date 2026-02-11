@@ -24,7 +24,7 @@ public class MultimediaJPA {
 
     @ColumnDefault("'imagen'")
     @Column(name = "tipo", columnDefinition = "tipo_recurso")
-    private Object tipo;
+    private String tipo;
 
     @ColumnDefault("0")
     @Column(name = "orden")
@@ -54,11 +54,11 @@ public class MultimediaJPA {
         this.fichero = fichero;
     }
 
-    public Object getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(Object tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 

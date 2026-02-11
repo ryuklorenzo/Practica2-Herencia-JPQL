@@ -123,7 +123,7 @@ public class ViviendaJPA {
         this.garaje = garaje;
     }
 
-    public Object getTipoVivienda() {
+    public String getTipoVivienda() {
         return tipoVivienda;
     }
 

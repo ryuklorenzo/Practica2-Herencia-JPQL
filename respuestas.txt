@@ -4,3 +4,19 @@ Indicar cómo ha resuelto las relaciones entre las tablas la herramienta de Inte
 
 La carga es “LAZY” o “EARLY”. ¿Cuál piensas que es la razón para que por defecto seleccione una de ellas?
     - Es lazy por defecto, para evitar el problema de n+1 consultas
+
+EJ2:
+Cuantas consultas sql se ejecutan?
+    - Se ejecuta 1 y pide 2 datos diferentes, esto es lo que muestra por pantalla
+
+    Hibernate:
+        select
+            p1_0.id,
+            p1_0.nombre
+        from
+            provincias p1_0
+    Alicante
+    Murcia
+
+Obtener ahora para cada provincia las localidades, dentro del bucle. ¿Qué está
+pasando?
