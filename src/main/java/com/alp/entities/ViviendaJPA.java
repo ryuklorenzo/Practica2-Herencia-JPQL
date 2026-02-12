@@ -49,8 +49,9 @@ public class ViviendaJPA extends PropiedadesJPA {
     @Column(name = "garaje")
     private Boolean garaje;
 
+    @Convert(converter = TipoViviendaConverter.class)
     @Column(name = "tipo_vivienda", columnDefinition = "tipo_vivienda_enum not null")
-    private String tipoVivienda;
+    private TipoVivienda tipoVivienda;
 /*
     public UUID getId() {
         return id;

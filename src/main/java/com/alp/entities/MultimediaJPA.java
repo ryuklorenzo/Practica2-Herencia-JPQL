@@ -22,9 +22,9 @@ public class MultimediaJPA {
     @Column(name = "fichero", nullable = false)
     private String fichero;
 
-    @ColumnDefault("'imagen'")
+    @Convert(converter = TipoRecursoConverter.class)
     @Column(name = "tipo", columnDefinition = "tipo_recurso")
-    private String tipo;
+    private TipoRecurso tipo;
 
     @ColumnDefault("0")
     @Column(name = "orden")

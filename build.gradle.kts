@@ -24,7 +24,7 @@ dependencies {
     implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
 
     // PostgreSQL driver
-    runtimeOnly("org.postgresql:postgresql:42.7.3")
+    implementation("org.postgresql:postgresql:42.7.3")
 }
 
 tasks.test {

@@ -25,17 +25,19 @@ public class PropiedadesJPA {
     private LocalidadesJPA localidad;
     @Column(name = "metros_cuadrados", nullable = false, precision = 10, scale = 2)
     private BigDecimal metrosCuadrados;
+    @Convert(converter = PuntoGeograficoConverter.class)
     @Column(name = "coordenadas", columnDefinition = "point")
     private PuntoGeografico coordenadas;
     @Column(name = "precio", nullable = false, precision = 15, scale = 2)
     private BigDecimal precio;
     @Column(name = "precio_rebajado", precision = 15, scale = 2)
     private BigDecimal precioRebajado;
-    @ColumnDefault("'en venta'")
+    @Convert(converter = EstadoPropiedadConverter.class)
     @Column(name = "estado", columnDefinition = "estado_propiedad")
-    private String estado;
+    private EstadoPropiedad estado;
+    @Convert(converter = OpcionPropiedadConverter.class)
     @Column(name = "opcion", columnDefinition = "opcion_propiedad not null")
-    private String opcion;
+    private OpcionPropiedad opcion;
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "fecha_creacion")
     private Instant fechaCreacion;
@@ -117,7 +119,7 @@ public class PropiedadesJPA {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EstadoPropiedad estado) {
         this.estado = estado;
     }
 
@@ -125,7 +127,7 @@ public class PropiedadesJPA {
         return opcion;
     }
 
-    public void setOpcion(String opcion) {
+    public void setOpcion(OpcionPropiedad opcion) {
         this.opcion = opcion;
     }
 
