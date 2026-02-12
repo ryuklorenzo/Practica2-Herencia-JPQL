@@ -16,7 +16,6 @@ public class PuntoGeograficoConverter implements AttributeConverter<PuntoGeograf
         try {
             PGobject pgObj = new PGobject();
             pgObj.setType("point");
-            // PostgreSQL espera el formato (x,y)
             pgObj.setValue("(" + attribute.getX() + "," + attribute.getY() + ")");
             return pgObj;
         } catch (SQLException e) {
@@ -29,12 +28,9 @@ public class PuntoGeograficoConverter implements AttributeConverter<PuntoGeograf
         if (dbData == null) {
             return null;
         }
-
-        // El driver puede devolver un String o un PGobject dependiendo de la versión/configuración
-        String value = dbData.toString(); // Formato esperado: (x,y)
+        String value = dbData.toString();
 
         try {
-            // Limpiamos los paréntesis y dividimos por la coma
             value = value.replace("(", "").replace(")", "");
             String[] parts = value.split(",");
 

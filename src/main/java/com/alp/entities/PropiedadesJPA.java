@@ -12,6 +12,33 @@ import java.util.UUID;
 @Entity
 @Table(name = "propiedades")
 @Inheritance(strategy = InheritanceType.JOINED)
+@NamedQueries({
+        @NamedQuery(name = "Propiedad.entrePrecios",
+                query = "SELECT p FROM PropiedadesJPA p WHERE p.precio BETWEEN :min AND :max"),
+
+        @NamedQuery(name = "Propiedad.porEstadoConUbicacion",
+                query = "SELECT p FROM PropiedadesJPA p " +
+                        "JOIN FETCH p.localidad l " +
+                        "JOIN FETCH l.provincia prov " +
+                        "WHERE p.estado = :estado"),
+
+        @NamedQuery(name = "Propiedad.precioMedio",
+                query = "SELECT AVG(p.precio) FROM PropiedadesJPA p"),
+
+        @NamedQuery(name = "Propiedad.rebajadasPorProvincia",
+                query = "SELECT p FROM PropiedadesJPA p " +
+                        "JOIN p.localidad l " +
+                        "JOIN l.provincia prov " +
+                        "WHERE prov.nombre = :nombreProvincia " +
+                        "AND p.precioRebajado < p.precio"),
+
+        @NamedQuery(name = "Propiedad.completaPorEstado",
+                query = "SELECT DISTINCT p FROM PropiedadesJPA p " +
+                        "JOIN FETCH p.localidad l " +
+                        "JOIN FETCH l.provincia prov " +
+                        "LEFT JOIN FETCH p.multimedia m " +
+                        "WHERE p.estado = :estado")
+})
 public class PropiedadesJPA {
     @Id
     @Column(name = "id", nullable = false)
@@ -36,7 +63,7 @@ public class PropiedadesJPA {
     @Column(name = "estado", columnDefinition = "estado_propiedad")
     private EstadoPropiedad estado;
     @Convert(converter = OpcionPropiedadConverter.class)
-    @Column(name = "opcion", columnDefinition = "opcion_propiedad not null")
+    @Column(name = "opcion", columnDefinition = "opcion_propiedad", nullable = false)
     private OpcionPropiedad opcion;
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "fecha_creacion")

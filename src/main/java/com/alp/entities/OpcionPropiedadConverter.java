@@ -12,7 +12,7 @@ public class OpcionPropiedadConverter implements AttributeConverter<OpcionPropie
         if (attribute == null) return null;
         try {
             PGobject pgObj = new PGobject();
-            pgObj.setType("opcion_propiedad"); // Debe coincidir con el nombre en Postgres
+            pgObj.setType("opcion_propiedad");
             pgObj.setValue(attribute.getValorDb());
             return pgObj;
         } catch (SQLException e) {

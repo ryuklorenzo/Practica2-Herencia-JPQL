@@ -12,7 +12,7 @@ public class TipoViviendaConverter implements AttributeConverter<TipoVivienda, O
         if (attribute == null) return null;
         try {
             PGobject pgObj = new PGobject();
-            pgObj.setType("tipo_vivienda_enum"); // Nombre exacto en el script SQL
+            pgObj.setType("tipo_vivienda_enum");
             pgObj.setValue(attribute.getValorDb());
             return pgObj;
         } catch (SQLException e) {

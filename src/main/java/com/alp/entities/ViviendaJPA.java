@@ -50,7 +50,7 @@ public class ViviendaJPA extends PropiedadesJPA {
     private Boolean garaje;
 
     @Convert(converter = TipoViviendaConverter.class)
-    @Column(name = "tipo_vivienda", columnDefinition = "tipo_vivienda_enum not null")
+    @Column(name = "tipo_vivienda", columnDefinition = "tipo_vivienda_enum", nullable = false)
     private TipoVivienda tipoVivienda;
 /*
     public UUID getId() {
@@ -125,11 +125,11 @@ public class ViviendaJPA extends PropiedadesJPA {
         this.garaje = garaje;
     }
 
-    public String getTipoVivienda() {
+    public TipoVivienda getTipoVivienda() {
         return tipoVivienda;
     }
 
-    public void setTipoVivienda(String tipoVivienda) {
+    public void setTipoVivienda(TipoVivienda tipoVivienda) {
         this.tipoVivienda = tipoVivienda;
     }
 

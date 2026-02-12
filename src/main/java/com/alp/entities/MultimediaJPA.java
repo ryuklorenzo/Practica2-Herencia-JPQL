@@ -54,11 +54,11 @@ public class MultimediaJPA {
         this.fichero = fichero;
     }
 
-    public String getTipo() {
+    public TipoRecurso getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoRecurso tipo) {
         this.tipo = tipo;
     }
 

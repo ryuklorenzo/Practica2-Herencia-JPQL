@@ -1,8 +1,6 @@
 package com.alp;
 
-import com.alp.entities.LocalidadesJPA;
-import com.alp.entities.ProvinciaJPA;
-import com.alp.entities.ViviendaJPA;
+import com.alp.entities.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -20,11 +18,28 @@ public class Main {
         //solucionJoinFetch();
         //solucionEntityGraph();
         //consultarPropiedadesPolimorfismo();
-
+        ejecutarConsultasNombradas();
 
     }
 
-
+    public static void ejecutarConsultasNombradas() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadPersistencia");
+        EntityManager em = emf.createEntityManager();
+        System.out.println("--- EJECUTANDO NAMED QUERIES ---");
+        List<PropiedadesJPA> resultados = em.createNamedQuery("Propiedad.completaPorEstado", PropiedadesJPA.class)
+                .setParameter("estado", EstadoPropiedad.EN_VENTA)
+                .getResultList();
+        for (PropiedadesJPA p : resultados) {
+            System.out.println("Propiedad: " + p.getReferencia() +
+                    " | Ubicación: " + p.getLocalidad().getNombre() +
+                    " (" + p.getLocalidad().getProvincia().getNombre() + ")" +
+                    " | Fotos: " + p.getMultimedia().size());
+        }
+        Double precioMedio = em.createNamedQuery("Propiedad.precioMedio", Double.class)
+                .getSingleResult();
+        System.out.println("El precio medio global es: " + precioMedio + " €");
+        em.close();
+    }
 
     public static void consultarPropiedadesPolimorfismo() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadPersistencia");
