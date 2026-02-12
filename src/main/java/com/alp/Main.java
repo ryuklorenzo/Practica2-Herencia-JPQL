@@ -27,7 +27,7 @@ public class Main {
         EntityManager em = emf.createEntityManager();
         System.out.println("--- EJECUTANDO NAMED QUERIES ---");
         List<PropiedadesJPA> resultados = em.createNamedQuery("Propiedad.completaPorEstado", PropiedadesJPA.class)
-                .setParameter("estado", EstadoPropiedad.EN_VENTA)
+                .setParameter("estado", EstadoPropiedad.EN_VENTA) // Pasa el ENUM directamente
                 .getResultList();
         for (PropiedadesJPA p : resultados) {
             System.out.println("Propiedad: " + p.getReferencia() +

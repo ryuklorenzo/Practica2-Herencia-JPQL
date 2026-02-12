@@ -59,8 +59,8 @@ public class PropiedadesJPA {
     private BigDecimal precio;
     @Column(name = "precio_rebajado", precision = 15, scale = 2)
     private BigDecimal precioRebajado;
-    @Convert(converter = EstadoPropiedadConverter.class)
     @Column(name = "estado", columnDefinition = "estado_propiedad")
+    @Convert(converter = EstadoPropiedadConverter.class)
     private EstadoPropiedad estado;
     @Convert(converter = OpcionPropiedadConverter.class)
     @Column(name = "opcion", columnDefinition = "opcion_propiedad", nullable = false)

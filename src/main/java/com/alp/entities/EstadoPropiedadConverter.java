@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 @Converter(autoApply = true)
 public class EstadoPropiedadConverter implements AttributeConverter<EstadoPropiedad, Object> {
+
     @Override
     public Object convertToDatabaseColumn(EstadoPropiedad attribute) {
         if (attribute == null) return null;
@@ -15,7 +16,9 @@ public class EstadoPropiedadConverter implements AttributeConverter<EstadoPropie
             pgObj.setType("estado_propiedad");
             pgObj.setValue(attribute.getValorDb());
             return pgObj;
-        } catch (SQLException e) { throw new RuntimeException(e); }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
