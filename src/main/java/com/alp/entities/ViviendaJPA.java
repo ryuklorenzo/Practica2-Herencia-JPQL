@@ -10,8 +10,9 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "viviendas")
-public class ViviendaJPA {
-    @Id
+@PrimaryKeyJoinColumn(name = "propiedad_id")
+public class ViviendaJPA extends PropiedadesJPA {
+    /*@Id
     @Column(name = "propiedad_id", nullable = false)
     private UUID id;
 
@@ -19,7 +20,7 @@ public class ViviendaJPA {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "propiedad_id", nullable = false)
-    private PropiedadesJPA propiedades;
+    private PropiedadesJPA propiedades;*/
 
     @Column(name = "metros_habitables", precision = 10, scale = 2)
     private BigDecimal metrosHabitables;
@@ -50,7 +51,7 @@ public class ViviendaJPA {
 
     @Column(name = "tipo_vivienda", columnDefinition = "tipo_vivienda_enum not null")
     private String tipoVivienda;
-
+/*
     public UUID getId() {
         return id;
     }
@@ -65,7 +66,7 @@ public class ViviendaJPA {
 
     public void setPropiedades(PropiedadesJPA propiedades) {
         this.propiedades = propiedades;
-    }
+    }*/
 
     public BigDecimal getMetrosHabitables() {
         return metrosHabitables;

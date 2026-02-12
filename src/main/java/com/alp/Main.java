@@ -15,12 +15,134 @@ public class Main {
         //updateProvincia();
         //altaLocalidad();
         //modificarViviendaMerge();
-        solucionarMergeYBorrar();
-
+        //solucionarMergeYBorrar();
+        //demoProblemaNMas1();
+        //solucionJoinFetch();
+        //solucionEntityGraph();
+        //consultarPropiedadesPolimorfismo();
 
 
     }
 
+
+
+    public static void consultarPropiedadesPolimorfismo() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadPersistencia");
+        EntityManager em = emf.createEntityManager();
+        System.out.println("--- CONSULTA POLIMÓRFICA (Ejercicio 5.3) ---");
+        String jpql = "SELECT p FROM PropiedadesJPA p";
+        java.util.List<com.alp.entities.PropiedadesJPA> lista = em.createQuery(jpql, com.alp.entities.PropiedadesJPA.class).getResultList();
+
+        for (com.alp.entities.PropiedadesJPA p : lista) {
+            System.out.print("Ref: " + p.getReferencia() +
+                    " | Precio: " + p.getPrecio() + " €" +
+                    " | m2: " + p.getMetrosCuadrados());
+            if (p instanceof com.alp.entities.ViviendaJPA v) {
+                System.out.println(" -> [VIVIENDA] " +
+                        "Habitables: " + v.getMetrosHabitables() + "m2, " +
+                        "Habs: " + v.getHabitaciones() + ", " +
+                        "Aseos: " + v.getAseos() + ", " +
+                        "Aire: " + (v.getAireAcondicionado() ? "Sí" : "No"));
+            }
+            else if (p instanceof com.alp.entities.TerrenoJPA t) {
+                System.out.println(" -> [TERRENO] " +
+                        "Edificabilidad: " + t.getEdificabilidad() + ", " +
+                        "Urbanizable: " + (t.getUrbanizable() ? "Sí" : "No"));
+            }
+            else if (p instanceof com.alp.entities.LocalesJPA l) {
+                System.out.println(" -> [LOCAL] " +
+                        "Escaparate: " + (l.getEscaparate() ? "Sí" : "No") + ", " +
+                        "Salida Humos: " + (l.getSalidaHumos() ? "Sí" : "No"));
+            }
+            else {
+                System.out.println("PROPIEDAD GENÉRICA");
+            }
+        }
+        em.close();
+    }
+    public static void solucionEntityGraph() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadPersistencia");
+        EntityManager em = emf.createEntityManager();
+        System.out.println("--- SOLUCIÓN CON ENTITY GRAPH ---");
+        jakarta.persistence.EntityGraph<ProvinciaJPA> graph = em.createEntityGraph(ProvinciaJPA.class);
+
+        jakarta.persistence.Subgraph<com.alp.entities.LocalidadesJPA> localidadesGraph =
+                graph.addSubgraph("localidades");
+        jakarta.persistence.Subgraph<com.alp.entities.PropiedadesJPA> propiedadesGraph =
+                localidadesGraph.addSubgraph("propiedades");
+
+        //.addAttributeNodes porque ya no necesitamos mas
+        propiedadesGraph.addAttributeNodes("multimedia");
+        List<ProvinciaJPA> provincias = em.createQuery("SELECT p FROM ProvinciaJPA p", ProvinciaJPA.class)
+                .setHint("jakarta.persistence.fetchgraph", graph)
+                .getResultList();
+        List<ProvinciaJPA> provinciasUnicas = new java.util.ArrayList<>(
+                new java.util.LinkedHashSet<>(provincias)
+        );
+        for (ProvinciaJPA p : provinciasUnicas) {
+            System.out.println("Provincia: " + p.getNombre());
+            for (com.alp.entities.LocalidadesJPA l : p.getLocalidades()) {
+                System.out.println("\tLocalidad: " + l.getNombre());
+                for (com.alp.entities.PropiedadesJPA prop : l.getPropiedades()) {
+                    System.out.println("\t\tPropiedad: " + prop.getReferencia() +
+                            " (Media: " + prop.getMultimedia().size() + ")");
+                }
+            }
+        }
+        em.close();
+    }
+    public static void solucionJoinFetch() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadPersistencia");
+        EntityManager em = emf.createEntityManager();
+
+        System.out.println("--- SOLUCIÓN JOIN FETCH (Sin DISTINCT en SQL) ---");
+
+        //podriamos usar DISTINC para los duplicados pero da un error asi que usaremos otra funcion para quitarlos abajo
+        String jpql = "SELECT p FROM ProvinciaJPA p " +
+                "JOIN FETCH p.localidades l " +
+                "JOIN FETCH l.propiedades prop " +
+                "LEFT JOIN FETCH prop.multimedia";
+
+        List<ProvinciaJPA> provinciasConDuplicados = em.createQuery(jpql, ProvinciaJPA.class).getResultList();
+
+        List<ProvinciaJPA> provincias = new java.util.ArrayList<>(
+                new java.util.LinkedHashSet<>(provinciasConDuplicados)
+        ); // eliminar dupes
+        for (ProvinciaJPA p : provincias) {
+            System.out.println("Provincia: " + p.getNombre());
+            for (com.alp.entities.LocalidadesJPA l : p.getLocalidades()) {
+                System.out.println("\tLocalidad: " + l.getNombre());
+                for (com.alp.entities.PropiedadesJPA prop : l.getPropiedades()) {
+                    System.out.println("\t\tPropiedad: " + prop.getReferencia() +
+                            " (Media: " + prop.getMultimedia().size() + ")");
+                }
+            }
+        }
+
+        em.close();
+    }
+    public static void demoProblemaNMas1() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadPersistencia");
+        EntityManager em = emf.createEntityManager();
+        System.out.println("Inicio de la consulta larga");
+        List<ProvinciaJPA> provincias = em.createQuery("SELECT p FROM ProvinciaJPA p", ProvinciaJPA.class).getResultList();
+
+        for (ProvinciaJPA p : provincias) {
+            System.out.println("Provincia: " + p.getNombre());
+
+            for (com.alp.entities.LocalidadesJPA l : p.getLocalidades()) {
+                System.out.println("\tLocalidad: " + l.getNombre());
+
+                for (com.alp.entities.PropiedadesJPA prop : l.getPropiedades()) {
+                    System.out.println("\t\tPropiedad: " + prop.getReferencia());
+
+                    System.out.println("\t\t\tMedia: " + prop.getMultimedia().size() + " archivos.");
+                }
+            }
+        }
+        System.out.println("--- FIN CONSULTA ---");
+        em.close();
+    }
     public static void solucionarMergeYBorrar() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadPersistencia");
         EntityManager em = emf.createEntityManager();

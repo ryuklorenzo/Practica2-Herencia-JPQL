@@ -46,10 +46,11 @@ public class LocalidadesJPA {
         return provincia;
     }
 
-    public void setProvincia(ProvinciaJPA provincia) {
-        this.provincia = provincia;
+    public void setProvincia(ProvinciaJPA provinciaJPA) {
+        this.provincia = provinciaJPA;
     }
 
+    // Getters y Setters de la nueva lista
     public Set<PropiedadesJPA> getPropiedades() {
         return propiedades;
     }
@@ -57,5 +58,4 @@ public class LocalidadesJPA {
     public void setPropiedades(Set<PropiedadesJPA> propiedades) {
         this.propiedades = propiedades;
     }
-
 }

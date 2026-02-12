@@ -11,55 +11,43 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "propiedades")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class PropiedadesJPA {
     @Id
     @Column(name = "id", nullable = false)
     private UUID id;
-
     @Column(name = "referencia", nullable = false, length = 20)
     private String referencia;
-
     @Column(name = "direccion", nullable = false)
     private String direccion;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "localidad_id")
     private LocalidadesJPA localidad;
-
     @Column(name = "metros_cuadrados", nullable = false, precision = 10, scale = 2)
     private BigDecimal metrosCuadrados;
-
     @Column(name = "coordenadas", columnDefinition = "point")
-    private String coordenadas;
-
+    private PuntoGeografico coordenadas;
     @Column(name = "precio", nullable = false, precision = 15, scale = 2)
     private BigDecimal precio;
-
     @Column(name = "precio_rebajado", precision = 15, scale = 2)
     private BigDecimal precioRebajado;
-
     @ColumnDefault("'en venta'")
     @Column(name = "estado", columnDefinition = "estado_propiedad")
     private String estado;
-
     @Column(name = "opcion", columnDefinition = "opcion_propiedad not null")
     private String opcion;
-
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "fecha_creacion")
     private Instant fechaCreacion;
-
-    @OneToOne(mappedBy = "propiedades")
-    private LocalesJPA localesJPA;
-
-    @OneToMany
+    @OneToMany(mappedBy = "propiedad")
     private Set<MultimediaJPA> multimedia = new LinkedHashSet<>();
+    public PuntoGeografico getCoordenadas() {
+        return coordenadas;
+    }
 
-    @OneToOne(mappedBy = "propiedades")
-    private TerrenoJPA terreno;
-
-    @OneToOne(mappedBy = "propiedades")
-    private ViviendaJPA vivienda;
+    public void setCoordenadas(PuntoGeografico coordenadas) {
+        this.coordenadas = coordenadas;
+    }
 
     public UUID getId() {
         return id;
@@ -100,14 +88,14 @@ public class PropiedadesJPA {
     public void setMetrosCuadrados(BigDecimal metrosCuadrados) {
         this.metrosCuadrados = metrosCuadrados;
     }
-
-    public String getCoordenadas() {
+/*
+    public Object getCoordenadas() {
         return coordenadas;
     }
 
-    public void setCoordenadas(String coordenadas) {
+    public void setCoordenadas(Object coordenadas) {
         this.coordenadas = coordenadas;
-    }
+    }*/
 
     public BigDecimal getPrecio() {
         return precio;
@@ -125,7 +113,7 @@ public class PropiedadesJPA {
         this.precioRebajado = precioRebajado;
     }
 
-    public String getEstado() {
+    public Object getEstado() {
         return estado;
     }
 
@@ -133,7 +121,7 @@ public class PropiedadesJPA {
         this.estado = estado;
     }
 
-    public String getOpcion() {
+    public Object getOpcion() {
         return opcion;
     }
 
@@ -149,14 +137,6 @@ public class PropiedadesJPA {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public LocalesJPA getLocale() {
-        return localesJPA;
-    }
-
-    public void setLocale(LocalesJPA localesJPA) {
-        this.localesJPA = localesJPA;
-    }
-
     public Set<MultimediaJPA> getMultimedia() {
         return multimedia;
     }
@@ -164,21 +144,4 @@ public class PropiedadesJPA {
     public void setMultimedia(Set<MultimediaJPA> multimedia) {
         this.multimedia = multimedia;
     }
-
-    public TerrenoJPA getTerreno() {
-        return terreno;
-    }
-
-    public void setTerreno(TerrenoJPA terreno) {
-        this.terreno = terreno;
-    }
-
-    public ViviendaJPA getVivienda() {
-        return vivienda;
-    }
-
-    public void setVivienda(ViviendaJPA vivienda) {
-        this.vivienda = vivienda;
-    }
-
 }

@@ -9,8 +9,9 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "locales")
-public class LocalesJPA {
-    @Id
+@PrimaryKeyJoinColumn(name = "propiedad_id")
+public class LocalesJPA extends PropiedadesJPA {
+    /*@Id
     @Column(name = "propiedad_id", nullable = false)
     private UUID id;
 
@@ -18,7 +19,7 @@ public class LocalesJPA {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "propiedad_id", nullable = false)
-    private PropiedadesJPA propiedades;
+    private PropiedadesJPA propiedades;*/
 
     @ColumnDefault("false")
     @Column(name = "escaparate")
@@ -27,7 +28,7 @@ public class LocalesJPA {
     @ColumnDefault("false")
     @Column(name = "salida_humos")
     private Boolean salidaHumos;
-
+/*
     public UUID getId() {
         return id;
     }
@@ -42,7 +43,7 @@ public class LocalesJPA {
 
     public void setPropiedades(PropiedadesJPA propiedades) {
         this.propiedades = propiedades;
-    }
+    }*/
 
     public Boolean getEscaparate() {
         return escaparate;
