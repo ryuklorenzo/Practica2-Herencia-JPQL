@@ -25,19 +25,23 @@ public class Main {
     public static void ejecutarConsultasNombradas() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadPersistencia");
         EntityManager em = emf.createEntityManager();
-        System.out.println("--- EJECUTANDO NAMED QUERIES ---");
-        List<PropiedadesJPA> resultados = em.createNamedQuery("Propiedad.completaPorEstado", PropiedadesJPA.class)
-                .setParameter("estado", EstadoPropiedad.EN_VENTA) // Pasa el ENUM directamente
+
+        System.out.println("las malditas namedquerys");
+
+        List<PropiedadesJPA> resultadosSucios = em.createNamedQuery("Propiedad.completaPorEstado", PropiedadesJPA.class)
+                .setParameter("estado", EstadoPropiedad.EN_VENTA.getValorDb())
                 .getResultList();
+
+        List<PropiedadesJPA> resultados = new java.util.ArrayList<>(
+                new java.util.LinkedHashSet<>(resultadosSucios)
+        );
+
         for (PropiedadesJPA p : resultados) {
             System.out.println("Propiedad: " + p.getReferencia() +
-                    " | Ubicación: " + p.getLocalidad().getNombre() +
-                    " (" + p.getLocalidad().getProvincia().getNombre() + ")" +
-                    " | Fotos: " + p.getMultimedia().size());
+                    " | Ciudad: " + p.getLocalidad().getNombre() +
+                    " | Multimedia: " + p.getMultimedia().size());
         }
-        Double precioMedio = em.createNamedQuery("Propiedad.precioMedio", Double.class)
-                .getSingleResult();
-        System.out.println("El precio medio global es: " + precioMedio + " €");
+
         em.close();
     }
 

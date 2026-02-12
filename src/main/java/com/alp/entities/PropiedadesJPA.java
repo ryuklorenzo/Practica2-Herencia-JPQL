@@ -33,11 +33,11 @@ import java.util.UUID;
                         "AND p.precioRebajado < p.precio"),
 
         @NamedQuery(name = "Propiedad.completaPorEstado",
-                query = "SELECT DISTINCT p FROM PropiedadesJPA p " +
+                query = "SELECT p FROM PropiedadesJPA p " +
                         "JOIN FETCH p.localidad l " +
                         "JOIN FETCH l.provincia prov " +
                         "LEFT JOIN FETCH p.multimedia m " +
-                        "WHERE p.estado = :estado")
+                        "WHERE CAST(p.estado AS string) = :estado")
 })
 public class PropiedadesJPA {
     @Id
